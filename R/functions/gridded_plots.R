@@ -3,7 +3,7 @@
 ##############################
 gridded_plots <- function(
   data, palette_list, bg_colour, n_cols, n_rows, rounded = c(TRUE, FALSE),
-  resolution){
+  resolution, visible_grid = c(TRUE, FALSE), outer_margin){
   
   # Requires {tibble}, {dplyr}, {patchwork}, {ggplot2} and
   # custom function density_plot()
@@ -17,6 +17,18 @@ gridded_plots <- function(
   if(missing(resolution)){
     
     resolution <- 300
+    
+  }
+  
+  if(missing(visible_grid)){
+    
+    visible_grid <- TRUE
+    
+  }
+  
+  if(missing(outer_margin)){
+    
+    outer_margin <- 0
     
   }
   
@@ -38,7 +50,8 @@ gridded_plots <- function(
     
     p <- density_plot(
       data = data |> dplyr::filter(grouping_var == i),
-      palette = palette_ref[[i]], rounded = rounded, resolution = resolution)
+      palette = palette_ref[[i]], rounded = rounded, resolution = resolution,
+      visible_grid = visible_grid)
     
     plot_list[[i]] <- p
     
@@ -51,7 +64,8 @@ gridded_plots <- function(
       theme = ggplot2::theme(
         plot.background = ggplot2::element_rect(
           fill = bg_colour, colour = bg_colour),
-        plot.margin = ggplot2::margin(0,0,0,0, unit = "pt")))
+        plot.margin = ggplot2::margin(
+          outer_margin,outer_margin,outer_margin,outer_margin, unit = "pt")))
   
   return(plots_in_grid)
   
