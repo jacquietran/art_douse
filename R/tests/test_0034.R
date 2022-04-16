@@ -63,7 +63,7 @@ img_filtered <- img |>
   magick::image_oilpaint(radius = 30) |>
   # magick::image_blur(radius = 10, sigma = 10) |>
   magick::image_crop("900x900+50+50") |>
-  magick::image_scale("1000x1000!") |>
+  magick::image_scale("4000x4000!") |>
   magick::image_noise(noisetype = "laplacian") |>
   magick::image_noise(noisetype = "laplacian")
 
