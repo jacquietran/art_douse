@@ -2,11 +2,16 @@
 # For building plots in grid #
 ##############################
 gridded_plots <- function(
-  data, palette_list, bg_colour, n_cols, n_rows, rounded = c(TRUE, FALSE),
+  seed, data, palette_list, bg_colour, n_cols, n_rows, rounded = c(TRUE, FALSE),
   resolution, visible_grid = c(TRUE, FALSE), outer_margin){
   
   # Requires {tibble}, {dplyr}, {patchwork}, {ggplot2} and
   # custom function density_plot()
+  if(missing(seed)){
+    
+    seed <- as.numeric(Sys.time())
+    
+  }
   
   if(missing(rounded)){
     
@@ -35,6 +40,7 @@ gridded_plots <- function(
   n_plots <- n_cols * n_rows
   
   # Build each density plot inside a for loop
+  set.seed(seed)
   palette_assign <- tibble::tibble(
     plot_num = 1:n_plots,
     palette_num = sample(

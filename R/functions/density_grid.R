@@ -14,10 +14,12 @@ density_grid <- function(seed, n_cols, n_rows){
     # simple but effective progress indicator
     cat(".")
     
+    set.seed(i)
     data <- tibble::tibble(
       x = runif(2000, min = 0, max = 1),
       y = runif(2000, min = 0, max = 1))
     
+    set.seed(i)
     layer_data <- ggplot2::layer_data(
       ggplot2::ggplot() +
         ggplot2::stat_density_2d_filled(
