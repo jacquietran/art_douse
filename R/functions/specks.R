@@ -1,5 +1,6 @@
 specks <- function(
-  seed, grid_min, grid_max, dust_clearance, dust_size, bg_colour, dust_colour){
+  seed, grid_min, grid_max, dust_clearance, dust_size, bg_colour, dust_colour,
+  point_shape){
   
   # Requires {ambient}, {dplyr}, {particles}, {tidygraph}, {ggplot2}
   
@@ -36,6 +37,12 @@ specks <- function(
   if(missing(dust_colour)){
     
     dust_colour <- "#FFFFFF"
+    
+  }
+  
+  if(missing(point_shape)){
+    
+    point_shape <- 15
     
   }
   
@@ -86,7 +93,7 @@ specks <- function(
     ggplot2::geom_point(
       data = traces_subset,
       ggplot2::aes(x, y, group = particle),
-      size = dust_size, shape = 15, colour = dust_colour, fill = dust_colour) +
+      size = dust_size, shape = point_shape, colour = dust_colour, fill = dust_colour) +
     ggplot2::coord_equal(xlim = c(-3,3), ylim = c(-3,3), expand = FALSE) +
     ggplot2::theme_void() +
     ggplot2::theme(
