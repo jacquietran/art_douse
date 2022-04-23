@@ -153,5 +153,5 @@ img_final <- magick::image_flatten(
 # Export
 magick::image_write(
   img_final,
-  path = here::here(glue::glue("img/{`iteration_id`}.png")),
+  path = here::here(glue::glue("img/painted/{`iteration_id`}.png")),
   format = "png")
